@@ -1,0 +1,118 @@
+.div_nav{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.MuiAvatar-root{
+    font-size: 15px !important;
+}
+
+.MuiBadge-anchorOriginTopRightRectangle {
+    top: 0;
+    right: 0;
+    transform: scale(1) translate(30%, 40%) !important;
+    transform-origin: 100% 0%;
+}
+
+.MuiBadge-badge {
+    padding: 0px !important;
+    font-size: 0.55rem !important;
+}
+
+.div_icon_header{
+    float: right;
+    margin-left: auto;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.div_dateNow{
+    margin: 0 auto;
+    padding-right: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.div_navbar{
+    margin: 0 auto;
+    border-color: #ccc !important;
+    border: 1px solid #ccc;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.a_header_date{
+    text-decoration: none !important;
+    color: #7E84A3;
+    pointer-events:none;
+    font-size: 12px;
+}
+
+.dateNow_icon {
+    float: left;
+    margin-right: 8px;
+    color: #7E84A3;
+}
+
+.info_icon {
+    float: right;
+    margin-right: 25px;
+    color: cornflowerblue;
+}
+
+.bell_icon { 
+    float: right;
+    color: cornflowerblue;
+}
+
+.circle_icon { 
+    float: right;
+    color: white;
+    background-color: cornflowerblue !important;
+}
+
+@media screen and (max-width: 541px) {
+    .div_navbar{
+        all: revert;
+        margin: 0 auto;
+        border-color: #ccc !important;
+        border-bottom: 1px solid #ccc !important;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .div_nav{
+        padding-left: 0px !important;
+        padding-right: 0px;
+    }
+
+    .div_dateNow{
+        padding-bottom: 0px;
+    }
+
+    .div_dateNow{
+        padding-left: 10px !important;
+    }
+
+    .a_header_date{
+        font-size: 10px;
+    }
+}

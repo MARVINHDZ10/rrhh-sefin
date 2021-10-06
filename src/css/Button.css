@@ -1,0 +1,12 @@
+button {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.btn-primary {
+  background-color: #0058FF !important;
+}
+
+.floatR{
+  float: right !important;
+}

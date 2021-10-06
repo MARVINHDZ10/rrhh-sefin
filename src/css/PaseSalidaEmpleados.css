@@ -1,0 +1,49 @@
+.dataTables_info{
+    display: none !important;
+}
+
+.editIcon{
+    margin-right: 10px;
+}
+
+.table-foot{
+    display: none !important;
+}
+
+.PrivateTabIndicator-colorSecondary-12 {
+    background-color: #3f51b5 !important;
+}
+
+.page-item{
+    border-color: #000;
+    border: 1px solid #ccc;
+}
+
+.pagination .page-item.active .page-link {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.MuiFormControl-root{
+    background-color: white !important;
+}
+
+.MuiSelect-select:focus{
+    background-color: white !important;
+}
+
+.PrivateNotchedOutline-root-16 {
+    top: -2px !important;
+}
+
+.makeStyles-formControl-12 {
+    margin-left: 0px !important;
+}
+
+.rowsPerPageSelect{
+    padding-left: 0px !important;
+}
+
+.rowsearch{
+    margin-left: 1px !important;
+}
