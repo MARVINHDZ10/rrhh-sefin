@@ -11,8 +11,8 @@ import { Typography } from "@material-ui/core";
 import { ButtonCustomized } from '../components/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import * as moment from 'moment';
-import 'moment/locale/es'
-moment.locale('es')
+import 'moment/locale/es';
+moment.locale('es');
 
 const useStyles = makeStyles((theme) => ({
 
@@ -40,19 +40,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar({keycloak, state}) {
+function Navbar({ keycloak, state, roles }) {
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [showNotificaciones, setShowNotificaciones] = React.useState(null);
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;  
+  const id = open ? 'simple-popover' : undefined;
+
+  const openNoti = Boolean(showNotificaciones);
+  const idNoti = openNoti ? 'simple-popover' : undefined;
 
   const onShowInfoUser = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const onShowNotificacion = (event) => {
+    setShowNotificaciones(event.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleCloseNoti = () => {
+    setShowNotificaciones(null);
   };
 
   const logout = () => {
@@ -73,11 +86,49 @@ function Navbar({keycloak, state}) {
           height='70' />
         <div className='div_icon_header'>
           <InfoIcon fontSize='large' className='info_icon small' />
-          <IconButton className={classes.button} style={{ marginRight: '25px' }}>
-            <Badge badgeContent={15} color="secondary">
+          <IconButton className={classes.button} style={{ marginRight: '25px' }} onClick={onShowNotificacion}>
+            <Badge badgeContent={state.notificaciones} color="secondary">
               <NotificationsIcon fontSize='large' className='bell_icon' />
             </Badge>
           </IconButton>
+          <Popover
+            id={idNoti}
+            open={openNoti}
+            anchorEl={showNotificaciones}
+            onClose={handleCloseNoti}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }} >
+            <div className='div_infouser'>
+              {
+                state.tareasEmpleados &&
+                state.tareasEmpleados.map((item, index) => {
+                  return <div key={item.task_id}>
+                    <div className='col-12 div_name_info' key={item.task_id}>
+                      {item.task_name}
+                    </div>
+                    <Divider></Divider>
+                  </div>
+                })
+              }
+              {
+                state.tareasJefes &&
+                state.tareasJefes.map((item, index) => {
+                  return <div key={item.task_id}>
+                    <div className='col-12 div_name_info' key={item.task_id}>
+                      {item.task_name}
+                    </div>
+                    <Divider></Divider>
+                  </div>
+                })
+              }
+            </div>
+          </Popover>
           <Avatar fontSize='small' className={classes.small} onClick={onShowInfoUser}>{state.usersession.primer_nombre.charAt(0).toUpperCase()}{state.usersession.primer_apellido.charAt(0).toUpperCase()}</Avatar>
           <Popover
             id={id}
@@ -94,11 +145,11 @@ function Navbar({keycloak, state}) {
             }} >
             <div className='div_infouser'>
               <div className='col-12 div_name_info'>
-                {state.usersession.primer_nombre} {state.usersession.primer_apellido} 
+                {state.usersession.primer_nombre} {state.usersession.primer_apellido}
               </div>
               <div className='col-12 div_correo_info'>
                 <Typography variant="inherit">
-                {state.usersession.correo_trabajo} 
+                  {state.usersession.correo_trabajo}
                 </Typography>
               </div>
               <Divider />

@@ -10,6 +10,7 @@ import { Switch, Route } from 'react-router-dom';
 import { ButtonCustomized } from '../components/Button';
 import { Input } from '../components/Input';
 import PasesSalida from './PaseSalida/HomePasesSalida';
+import PaseSalidaService from "../services/PaseSalidaService";
 import store from '../store';
 
 class Home extends Component {
@@ -19,14 +20,57 @@ class Home extends Component {
 
     this.state = {
       showMenu: false,
-      usersession: ''
+      usersession: '',
+      notificaciones: 0,
+      tareasEmpleados: [],
+      tareasJefes: []
     };
 
     store.subscribe(() => {
       this.setState({ usersession: store.getState().userReducer[0] });
+      this.props.roles &&
+        this.props.roles.map((item, index) =>
+          item.includes("jefesUDEM") ? this.getPasesSalidaGrupo() : ""
+        );
+
+      this.props.roles &&
+        this.props.roles.map((item, index) =>
+          item.includes("empleadosUDEM") ? this.getPasesSalidaUser() : ""
+        );
     });
 
     this.setState = this.setState.bind(this);
+  }
+
+  getPasesSalidaGrupo() {
+    PaseSalidaService.getPasesSalidaGrupoList()
+      .then((response) => {
+        if (response.data != null) {
+          if (response.state === "success") {
+            let total = this.state.notificaciones + response.data.task_summary.length;
+            this.setState({ notificaciones: total, tareasJefes: response.data.task_summary });
+          }
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  getPasesSalidaUser() {
+    console.log(this.state.usersession.usuario_sso);
+    PaseSalidaService.getPasesSalidaUserList(this.state.usersession.usuario_sso)
+      .then((response) => {
+        if (response.data != null) {
+          if (response.state === "success") {
+            let total = this.state.notificaciones + response.data.task_summary.length;
+            this.setState({ notificaciones: total, tareasEmpleados: response.data.task_summary });
+          }
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   render() {
@@ -50,7 +94,7 @@ class Home extends Component {
       <div className='div_principal'>
         {this.state.usersession ? (
           <div>
-            <Navbar keycloak={this.props.keycloak} state={this.state} />
+            <Navbar keycloak={this.props.keycloak} state={this.state} roles={this.props.roles} />
             <div>
               <div className='col-2 menu_list' style={menuStyle}>
                 <ListMenu state={this.state} setState={this.setState} />
