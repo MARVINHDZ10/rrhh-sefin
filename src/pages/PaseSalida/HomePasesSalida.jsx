@@ -171,7 +171,7 @@ class HomePasesSalida extends React.Component {
             <Tabs value={this.state.valuetab} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="Mis Solicitudes" {...a11yProps(0)} />
               <Tab className={!this.state.showtabjefe ? 'd-none' : ''} label="Aprobar Solicitudes" {...a11yProps(1)} />
-              <Tab label="Historico" {...a11yProps(2)} />
+              {/*<Tab label="Historico" {...a11yProps(2)} />*/}
             </Tabs>
           </Box>
           <TabPanel value={this.state.valuetab} index={0}>
