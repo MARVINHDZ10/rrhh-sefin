@@ -2,7 +2,7 @@
   "realm": "pam-sso",
   "auth-server-url": "https://sso-desa-mdw-pool.apps.galel.sefin.gob.hn/auth",
   "ssl-required": "external",
-  "resource": "dashboard",
+  "resource": "sefin_node_rrhh_client",
   "public-client": true,
   "confidential-port": 0
 }
